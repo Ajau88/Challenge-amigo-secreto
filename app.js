@@ -1,5 +1,3 @@
-console.log("Ejecutando el challenge")
-
 let listaDeAmigos = [];
 const LIMITE_AMIGOS = 10;
 
@@ -7,5 +5,5 @@ const LIMITE_AMIGOS = 10;
 function agregarAmigo() {
     const input = document.getElementById('amigo');
     input.value.trim();
-    
+
 }
