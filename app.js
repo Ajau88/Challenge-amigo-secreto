@@ -63,10 +63,9 @@ function mostrarLista() {
         spanNombre.textContent = amigo;
 
         const btnEliminar = document.createElement('button');
-        btnEliminar.textContent = '×';
+        btnEliminar.textContent = 'x';
         btnEliminar.onclick = () => eliminarAmigo(indice);
         
-
         li.appendChild(spanNombre);
         li.appendChild(btnEliminar);
         ul.appendChild(li);
@@ -123,7 +122,28 @@ function validarNombre(nombre) {
     return {valido: true, mensaje: ''};
 }  
 
+//Buscar si existen nombres duplicado
+function buscarDuplicado(nombre) {
+    const nombreNormalizado = normalizarNombre(nombre);
 
+    return estado.listaDeAmigos.find(amigo => normalizarNombre (amigo) === nombreNormalizado) || null;
+}
 
+//Normalizar nombre para compararlo
+function normalizarNombre(nombre) {
+    return nombre
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, ' ');
+}
 
+//Eliminar amigo de la lista
+function eliminarAmigo(indice) {
+    const nombreEliminado = estado.listaDeAmigos[indice];
+    estado.listaDeAmigos.splice(indice, 1);
+
+    mostrarLista();
+    actualizarDisponibles();
+    mostrarMensaje(`${nombreEliminado} eliminado de la lista`, 'info');
+}
 
