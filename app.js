@@ -66,6 +66,31 @@ function mostrarLista() {
         btnEliminar.textContent = 'eliminar';
         btnEliminar.onclick = () => eliminarAmigo(indice);
         
+        // Estilo para botón pequeño y discreto
+        btnEliminar.style.cssText = `
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        `;
+        btnEliminar.title = 'Eliminar';
+        
+        // Contenedor con flexbox para alinear nombre y botón
+        li.style.cssText = `
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        `;
+        
         li.appendChild(spanNombre);
         li.appendChild(btnEliminar);
         ul.appendChild(li);
@@ -147,6 +172,36 @@ function eliminarAmigo(indice) {
     mostrarMensaje(`${nombreEliminado} eliminado de la lista`, 'info');
 }
 
+function sortearAmigo() {
+    // Valida que haya al menos 2 amigos
+    if (estado.listaDeAmigos.length < 2) {
+        mostrarMensaje('Necesitas al menos 2 amigos para hacer el sorteo', 'error');
+        return;
+    }
+
+    // Genera número aleatorio y selecciona amigo
+    const indiceAleatorio = Math.floor(Math.random() * estado.listaDeAmigos.length);
+    const amigoSorteado = estado.listaDeAmigos[indiceAleatorio];
+    
+    // Muestra el resultado
+    mostrarResultado(amigoSorteado);
+    mostrarMensaje('¡Sorteo realizado con éxito!', 'success');
+}
+
+//Mostrar resultado del sorteo
+function mostrarResultado(amigo) {
+    const resultadoUl = document.getElementById('resultado');
+    if (!resultadoUl) return;
+
+    resultadoUl.innerHTML = `
+        <li class="result-item">
+            <span class="result-label">Tu amigo secreto es:</span>
+            <span class="result-name">${amigo}</span>
+            <button onclick="nuevoSorteo()" class="new-draw-btn">Nuevo sorteo</button>
+        </li>
+    `;
+}
+
 //Actualizar contador de lugares disponibles
 function actualizarDisponibles() {
     if (!estado.elementos.disponibles) return;
@@ -181,6 +236,8 @@ function manejarEnter(event) {
         agregarAmigo();
     }
 }
+
+
 
 //Iniciar el juego
 function inicializar() {
