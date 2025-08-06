@@ -195,12 +195,42 @@ function mostrarResultado(amigo) {
 
     resultadoUl.innerHTML = `
         <li class="result-item">
-            <span class="result-label">Tu amigo secreto es:</span>
-            <span class="result-name">${amigo}</span>
-            <button onclick="nuevoSorteo()" class="new-draw-btn">Nuevo sorteo</button>
+            <div class="result-content">
+                <span class="result-label">Tu amigo secreto es:</span>
+                <span class="result-name">${amigo}</span>
+            </div>
+            <button onclick="nuevoSorteo()" class="new-draw-btn" style="
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 15px;
+                padding: 4px 12px;
+                font-size: 11px;
+                cursor: pointer;
+                margin-top: 8px;
+                transition: background 0.2s ease;
+            " onmouseover="this.style.background='#0056b3'" 
+               onmouseout="this.style.background='#007bff'">
+                🔄 Nuevo sorteo
+            </button>
         </li>
     `;
 }
+
+//Preparar nuevo sorteo
+function nuevoSorteo() {
+    limpiarResultado();
+    mostrarMensaje('Listo para un nuevo sorteo', 'info');
+}
+
+//Limpiar resultados del sorteo
+function limpiarResultado() {
+    const resultadoUl = document.getElementById('resultado');
+    if (resultadoUl) {
+        resultadoUl.innerHTML = '';
+    }
+}
+
 
 //Actualizar contador de lugares disponibles
 function actualizarDisponibles() {
