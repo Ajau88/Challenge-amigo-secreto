@@ -35,12 +35,29 @@ function agregarAmigo() {
     estado.elmentos,input.focus();
 }
 
+//Función mostrar lista de amigos
+function mostarLista() {
+    const ul= estado.elementos.listaDeAmigos;
+    ul.innerHTML ='';
+    if (estado.listaDeAmigos.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'No hay amigos agregados aún.';
+        ul.appendChild(li);
+        return;
+    }
+
+    estado.listaDeAmigos.forEach((amigo, indice) => {
+        const li = document.createElement('li');
+
+        //Nombre de amigo
+        const spanNombre = document.createElement('span');
+        spanNombre.textContent = amigo;
+    });
+}
+
 //Validaciones y Utilidades
 
-/**  Para validar los nombres ingresado
-   @param {String} nombre 
-   @return {Object}
-   */
+
 function validarNombre(nombre) {
     //verificamos si se encuentra vacio
     if (!nombre)  {
@@ -84,6 +101,7 @@ function validarNombre(nombre) {
             nombreExistente: nombreExistente
         };
     }
-
 }  
+
+
 
