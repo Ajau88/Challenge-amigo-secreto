@@ -167,9 +167,9 @@ function normalizarNombre(nombre) {
 function eliminarAmigo(indice) {
     const nombreEliminado = estado.listaDeAmigos[indice];
     estado.listaDeAmigos.splice(indice, 1);
-
     mostrarLista();
     actualizarDisponibles();
+    limpiarResultado();
     mostrarMensaje(`${nombreEliminado} eliminado de la lista`, 'info');
 }
 
@@ -240,10 +240,31 @@ function mostrarResultado(amigo) {
     `;
 }
 
+function mostrarBotonReiniciar() {
+    const resultadoUl = document.getElementById('resultado');
+    if (!resultadoUl) return;
+    
+    resultadoUl.innerHTML = `
+        <li class="result-item">
+            <div class="result-content">
+                <span class="result-label">¡Todos los amigos ya fueron sorteados!</span>
+                <button onclick="reiniciarSorteos()" style="...">🔄 Empezar de nuevo</button>
+            </div>
+        </li>
+    `;
+}
+
+function reiniciarSorteos() {
+    estado.amigosSorteados = [];
+    limpiarResultado();
+    mostrarMensaje('Sorteos reiniciados. ¡Todos los amigos están disponibles de nuevo!', 'success');
+}
+
 //Preparar nuevo sorteo
 function nuevoSorteo() {
     limpiarResultado();
-    mostrarMensaje('Listo para un nuevo sorteo', 'info');
+     const amigosDisponibles = estado.listaDeAmigos.filter(a => !estado.amigosSorteados.includes(a));
+    mostrarMensaje(`Listo para sortear. Quedan ${amigosDisponibles.length} amigos disponibles`, 'info');
 }
 
 //Limpiar resultados del sorteo
