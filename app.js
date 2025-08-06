@@ -180,13 +180,32 @@ function sortearAmigo() {
         return;
     }
 
+    //Amigos no sorteados aún
+    const amigosDisponibles = estado.listaDeAmigos.filter(amigo => !estado.amigosSorteados.includes(amigo));
+
+    //Verificar si aún hay amigos disponibles
+    if (amigosDisponibles.length === 0) {
+        mostrarMensaje('¡Ya se sortearon todos los amigos! Reinicia para empezar de nuevo', 'info');
+        mostrarBotonReiniciar();
+        return;
+    }
+
     // Genera número aleatorio y selecciona amigo
-    const indiceAleatorio = Math.floor(Math.random() * estado.listaDeAmigos.length);
-    const amigoSorteado = estado.listaDeAmigos[indiceAleatorio];
+    const indiceAleatorio = Math.floor(Math.random() * amigosDisponibles.length);
+    const amigoSorteado = amigosDisponibles[indiceAleatorio];
     
+    //Agregar a la lista de sorteados
+    estado.amigosSorteados.push(amigoSorteado);
+
     // Muestra el resultado
     mostrarResultado(amigoSorteado);
-    mostrarMensaje('¡Sorteo realizado con éxito!', 'success');
+    
+    const restantes = amigosDisponibles.length - 1;
+    if (restantes > 0) {
+        mostrarMensaje(`¡Sorteo realizado! Quedan ${restantes} amigos por sortear`, 'success');
+    } else {
+        mostrarMensaje('¡Último amigo sorteado! Ya se eligieron todos', 'success');
+    }
 }
 
 //Mostrar resultado del sorteo
