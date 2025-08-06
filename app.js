@@ -9,34 +9,43 @@ const estado = {
     elementos: null
 };
 
+//Inicia referencias del DOM
+function inicializarElementos() {
+    estado.elementos = {
+        input: document.getElementById('amigo'),
+        listaDeAmigos: document.getElementById('listaDeAmigos'),
+        disponibles: document.getElementById('disponibles')
+    };
+}
+
 //Función de agregar amigo
 function agregarAmigo() {
-    const nombre = estado.elmentos.input.value.trim();
+    const nombre = estado.elementos.input.value.trim();
 
     //Validación de nombres
     const validacion = validarNombre(nombre);
     if (!validacion.valido) {
         mostrarMensaje(validacion.mensaje, 'error');
-        estado.elmentos.input.focus();
+        estado.elementos.input.focus();
         return;
     }
 
     //Agregar a la lista
     estado.listaDeAmigos.push(nombre);
-    estado.elmentos.imput.value ='';
+    estado.elementos.input.value ='';
 
     //Actualiza interfaz
-    mostarLista();
-    actualizarDisponible();
+    mostrarLista();
+    actualizarDisponibles();
 
-    //Mostar mensaje de confirmación
+    //Mostrar mensaje de confirmación
     mostrarMensaje(`${nombre} Agregado correctamente`, 'success');
     //Mantener focus para contuar agregando
-    estado.elmentos,input.focus();
+    estado.elementos.input.focus();
 }
 
 //Función mostrar lista de amigos
-function mostarLista() {
+function mostrarLista() {
     const ul= estado.elementos.listaDeAmigos;
     ul.innerHTML ='';
     if (estado.listaDeAmigos.length === 0) {
@@ -52,6 +61,15 @@ function mostarLista() {
         //Nombre de amigo
         const spanNombre = document.createElement('span');
         spanNombre.textContent = amigo;
+
+        const btnEliminar = document.createElement('button');
+        btnEliminar.textContent = '×';
+        btnEliminar.onclick = () => eliminarAmigo(indice);
+        
+
+        li.appendChild(spanNombre);
+        li.appendChild(btnEliminar);
+        ul.appendChild(li);
     });
 }
 
@@ -101,7 +119,11 @@ function validarNombre(nombre) {
             nombreExistente: nombreExistente
         };
     }
+
+    return {valido: true, mensaje: ''};
 }  
+
+
 
 
 
