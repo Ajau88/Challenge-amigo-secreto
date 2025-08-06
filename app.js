@@ -13,7 +13,7 @@ const estado = {
 function inicializarElementos() {
     estado.elementos = {
         input: document.getElementById('amigo'),
-        listaDeAmigos: document.getElementById('listaDeAmigos'),
+        listaDeAmigos: document.getElementById('listaAmigos'),
         disponibles: document.getElementById('disponibles')
     };
 }
@@ -63,7 +63,7 @@ function mostrarLista() {
         spanNombre.textContent = amigo;
 
         const btnEliminar = document.createElement('button');
-        btnEliminar.textContent = 'x';
+        btnEliminar.textContent = 'eliminar';
         btnEliminar.onclick = () => eliminarAmigo(indice);
         
         li.appendChild(spanNombre);
@@ -172,4 +172,35 @@ function mostrarMensaje(mensaje, tipo = 'info') {
     //Insertamos el DOM
     const inputWrapper = estado.elementos.input.parentNode;
     inputWrapper.insertAdjacentElement('afterend', div);
+
+}
+
+function manejarEnter(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        agregarAmigo();
+    }
+}
+
+//Iniciar el juego
+function inicializar() {
+    inicializarElementos();
+
+    //configuración de eventos
+    if (estado.elementos.input) {
+        estado.elementos.input.addEventListener('keypress', manejarEnter);
+        estado.elementos.input.focus();
+    }
+
+
+    mostrarLista();
+    actualizarDisponibles();
+
+    console.log('Aplicación inicializada correctamente');
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inicializar);
+} else {
+    inicializar();
 }
