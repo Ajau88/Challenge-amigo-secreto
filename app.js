@@ -1,5 +1,13 @@
-let listaDeAmigos = [];
-const LIMITE_AMIGOS = 10;
+// Se genera un estado centralizado y configuración
+const config = {
+    limite_amigos: 10,
+    longitud_minima: 2
+};
+
+const estado = {
+    listaDeAmigos: [],
+    elementos: null
+};
 
 //Función de agregar amigo
 function agregarAmigo() {
@@ -26,3 +34,30 @@ function agregarAmigo() {
     //Mantener focus para contuar agregando
     estado.elmentos,input.focus();
 }
+
+//Validaciones y Utilidades
+
+/**  Para validar los nombres ingresado
+   @param {String} nombre 
+   @return {Object}
+   */
+function validarNombre(nombre) {
+    //verificamos si se encuentra vacio
+    if (!nombre)  {
+        return {
+            valido: false,
+            mensaje: "Ingresa un nombre, por favor." 
+        };
+    }
+
+    // verificamos que tenga un tamaño de por lo menos 2 caracteres
+    if (nombre.length < config.longitud_minima) {
+        return {
+            valido: false,
+            mensaje: `El nombre debe tener por lo menos ${config.longitud_minima} caracteres.`
+        };
+    }
+
+    
+}  
+
