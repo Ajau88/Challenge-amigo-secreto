@@ -6,6 +6,7 @@ const config = {
 
 const estado = {
     listaDeAmigos: [],
+    amigosSorteados: [],
     elementos: null
 };
 
