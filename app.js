@@ -155,3 +155,21 @@ function actualizarDisponibles() {
 
     estado.elementos.disponibles.textContent = `Quedan ${disponibles} ${plural} disponibles.`;
 }
+
+//Mensaje para mostrar a usuario
+function mostrarMensaje(mensaje, tipo = 'info') {
+    //elimina el mensaje anterior
+    const mensajeAnterior = document.querySelector('.mensaje-temporal');
+    if (mensajeAnterior) {
+        mensajeAnterior.remove();
+    }
+
+    //crea nuevo mensaje
+    const div = document.createElement('div');
+    div.className = `mensaje-temporal mensaje-${tipo}`;
+    div.textContent = mensaje;
+
+    //Insertamos el DOM
+    const inputWrapper = estado.elementos.input.parentNode;
+    inputWrapper.insertAdjacentElement('afterend', div);
+}
