@@ -75,6 +75,15 @@ function validarNombre(nombre) {
         };   
     }
 
-    //
+    //Verificar nombres duplicados (sean en mayúscula o minúscula)
+    const nombreExistente = buscarDuplicado(nombre);
+    if (nombreExistente) {
+        return {
+            valido: false,
+            mensaje: `Este nombre ya existe como "${nombreExistente}". Recuerda no repetir los nombres.`,
+            nombreExistente: nombreExistente
+        };
+    }
+
 }  
 
