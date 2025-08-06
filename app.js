@@ -147,3 +147,11 @@ function eliminarAmigo(indice) {
     mostrarMensaje(`${nombreEliminado} eliminado de la lista`, 'info');
 }
 
+//Actualizar contador de lugares disponibles
+function actualizarDisponibles() {
+    if (!estado.elementos.disponibles) return;
+    const disponibles = config.limite_amigos - estado.listaDeAmigos.length;
+    const plural = disponibles === 1 ? 'puesto' : 'puestos';
+
+    estado.elementos.disponibles.textContent = `Quedan ${disponibles} ${plural} disponibles.`;
+}
