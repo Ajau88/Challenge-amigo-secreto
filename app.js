@@ -67,6 +67,14 @@ function validarNombre(nombre) {
         };
     }
 
-    
+    //Verificar limite de ingresos de amigos
+    if (estado.listaDeAmigos.length >= config.limite_amigos) {
+        return {
+            valido: false,
+            mensaje: `Ya has ingresado el máximo de  ${config.limite_amigos}amigos.`
+        };   
+    }
+
+    //
 }  
 
