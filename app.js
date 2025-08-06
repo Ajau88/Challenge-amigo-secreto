@@ -212,27 +212,30 @@ function sortearAmigo() {
 function mostrarResultado(amigo) {
     const resultadoUl = document.getElementById('resultado');
     if (!resultadoUl) return;
-
+    
+    //Calcular amigos disponibles y si ya terminó
+    const amigosDisponibles = estado.listaDeAmigos.filter(a => !estado.amigosSorteados.includes(a));
+    const yaTermino = amigosDisponibles.length === 0;
+    
     resultadoUl.innerHTML = `
         <li class="result-item">
             <div class="result-content">
                 <span class="result-label">Tu amigo secreto es:</span>
                 <span class="result-name">${amigo}</span>
+                
+                <!--Contador de progreso -->
+                <div class="sorteo-info">
+                    <small style="color: #666; font-size: 10px;">
+                        Sorteado ${estado.amigosSorteados.length} de ${estado.listaDeAmigos.length}
+                    </small>
+                </div>
             </div>
-            <button onclick="nuevoSorteo()" class="new-draw-btn" style="
-                background: #007bff;
-                color: white;
-                border: none;
-                border-radius: 15px;
-                padding: 4px 12px;
-                font-size: 11px;
-                cursor: pointer;
-                margin-top: 8px;
-                transition: background 0.2s ease;
-            " onmouseover="this.style.background='#0056b3'" 
-               onmouseout="this.style.background='#007bff'">
-                🔄 Nuevo sorteo
-            </button>
+            
+            <!-- Botones condicionales -->
+            ${yaTermino 
+                ? `<button onclick="reiniciarSorteos()" style="...">🔄 Empezar de nuevo</button>`
+                : `<button onclick="nuevoSorteo()" style="...">🎲 Sortear otro</button>`
+            }
         </li>
     `;
 }
