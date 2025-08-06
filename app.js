@@ -58,6 +58,15 @@ function validarNombre(nombre) {
         };
     }
 
+    //Verificar que solo tenga letras
+    const soloLetras = /^[A-Za-zÀ-ÿ\u00f1\u00d1\s]+$/;
+    if (!soloLetras.test(nombre)) {
+        return {
+            valido: false,
+            mensaje: "Solo es permitido el ingreso de letras y espacios (sin números ni símbolos)."
+        };
+    }
+
     
 }  
 
