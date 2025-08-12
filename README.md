@@ -26,7 +26,7 @@ Solo se aceptan nombres con un formato válido.
 ## 📦 Instalación y uso
 1. Accede a este repositorio en GitHub y descárgalo como archivo ZIP o clónalo con:  
    ```bash
-   
+   https://github.com/Ajau88/Challenge-amigo-secreto.git
 
 2. Una vez descargada la carpeta, ábrela en tu computadora.
 
