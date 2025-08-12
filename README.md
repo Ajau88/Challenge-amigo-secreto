@@ -20,19 +20,22 @@ Solo se aceptan nombres con un formato válido.
 
 ---
 
+
+
+
 ## 📦 Instalación y uso
 1. Accede a este repositorio en GitHub y descárgalo como archivo ZIP o clónalo con:  
    ```bash
-   git clone https://github.com/Ajau88/Challenge-amigo-secreto.git
+   
 
 2. Una vez descargada la carpeta, ábrela en tu computadora.
 
 3. Busca el archivo index.html y ábrelo en tu navegador web.
 
 Ingresa los nombres de tus amigos y realiza el sorteo.
-| Pantalla principal                         | Repositorio en GitHub               |
-| ------------------------------------------ | ----------------------------------- |
-| ![Pantalla principal](assets/captura1.png) | ![Repositorio](assets/captura2.png) |
+
+
+
 
 ✨ Autor
 Abrahan Albarran
